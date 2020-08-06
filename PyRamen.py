@@ -29,20 +29,33 @@ nested_dic = {
 "04-profit": 0,
 }
 for i in sales:
-    quantity = i[3]
+    quantity = int(i[3])
     sales_item = i[4]
-    if sales_item not in report:
+    if sales_item not in report.keys():
         report[sales_item] = nested_dic
-    else:
-        for i in menu:
-            item = i[0]
-            Price = i[3]
-            Cost = i[4]
-            if sales_item == item:
-                report[sales_item]["01-count"] += quantity
-                report[sales_item]["02-revenue"] += price * quantity
-                report[sales_item]["03-cogs"] += cost * quantity
-                report[sales_item]["04-profit"] += profit * quantity
+
+    for x in menu:
+
+        item = x[0]
+        price = float(x[3])
+        cost = float(x[4])
+
+        profit = price - cost
+
+        if sales_item == item:
+            x
+            report[sales_item]["01-count"] += quantity
+            report[sales_item]["02-revenue"] += price * quantity
+            report[sales_item]["03-cogs"] += cost * quantity
+            report[sales_item]["04-profit"] += profit * quantity
+        else:
+            pass
+            # print(f"{sales_item} does not equal {item}! NO MATCH!")
 print(report)
 
+with open("report.txt", "w") as txt_file:
+    for key, value in report.items():
+
+        line = f"{key} {value}\n"
+        txt_file.write(line)
 
